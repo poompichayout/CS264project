@@ -12,7 +12,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.get('/', function (req, res) {
-    res.render('index', {fname: 'Songsakdi', lName: 'Rongviri'});
+    res.render('index', {fname: 'Poompichayout', lName: 'Kongpiam', tag:"คนหล่อเท่ 2020"});
 });
 
 app.listen(PORT, function () {
