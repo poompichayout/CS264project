@@ -12,7 +12,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.get('/', function (req, res) {
-    res.render('index', {fname: 'Poompichayout', lName: 'Kongpiam', tag:"คนหล่อเท่ 2020"});
+    res.render('index', {});
 });
 
 app.listen(PORT, function () {
@@ -87,47 +87,47 @@ app.get('/api', function (req, res) {
 //req.end();
 
 
-const options = {
-    hostname: 'jsonplaceholder.typicode.com',
-    path: '/posts/1/comments',
-    method: 'GET',
-    'headers': {
-        'Content-Type': 'application/json',
-    }
-};
+// const options = {
+//     hostname: 'jsonplaceholder.typicode.com',
+//     path: '/posts/1/comments',
+//     method: 'GET',
+//     'headers': {
+//         'Content-Type': 'application/json',
+//     }
+// };
 
-function dataCounter(inputs) {
-    let counter = 0;
-    for (const input of inputs) {
-        if (input.postId === 1) {
-            counter += 1;
-            console.log('input.postId:' + input.postId);
-            console.log('input.email:' + input.email);
-        }
-    }
-    return counter;
-};
+// function dataCounter(inputs) {
+//     let counter = 0;
+//     for (const input of inputs) {
+//         if (input.postId === 1) {
+//             counter += 1;
+//             console.log('input.postId:' + input.postId);
+//             console.log('input.email:' + input.email);
+//         }
+//     }
+//     return counter;
+// };
 
-const req = http.request(options, function(response) {
-    response.setEncoding('utf8');
-    var body = '';
-    response.on('data', chunk => {
-        body += chunk;
-    });
+// const req = http.request(options, function(response) {
+//     response.setEncoding('utf8');
+//     var body = '';
+//     response.on('data', chunk => {
+//         body += chunk;
+//     });
 
-    response.on('end', () => {
-        console.log('body:' + body);
-        var data = JSON.parse(body);
-        console.log('number of posts:' + dataCounter(data));
-        console.log('data:' + data);
-        console.log('data[0]:' + data[0]);
-        console.log('data[0].id:' + data[0].id);
-        console.log('data[0].email:' + data[0].email);
-        console.log('end of GET request');
-    });
-});
+//     response.on('end', () => {
+//         console.log('body:' + body);
+//         var data = JSON.parse(body);
+//         console.log('number of posts:' + dataCounter(data));
+//         console.log('data:' + data);
+//         console.log('data[0]:' + data[0]);
+//         console.log('data[0].id:' + data[0].id);
+//         console.log('data[0].email:' + data[0].email);
+//         console.log('end of GET request');
+//     });
+// });
 
-req.on('error', e => {
-    console.log('Problem with request:', e.message);
-});
-req.end();
+// req.on('error', e => {
+//     console.log('Problem with request:', e.message);
+// });
+// req.end();
