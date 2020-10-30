@@ -3,18 +3,61 @@ var express = require('express');
 var path = require('path');
 var https = require('https');
 var http = require('http');
+const tuauth = require('./tuauth');
 
 var PORT  = process.env.PORT || 8080;
 
 var app = express();
 
+
+var options = {
+    'method': 'GET',
+    'hostname': 'restapi.tu.ac.th',
+    'path': '/api/v2/std/fac/all',
+    'headers': {
+      'Content-Type': 'application/json',
+      'Application-Key': 'TUd385e507f10b7b04ec0c73d853e9ae18a332e504be6a734cafe5527017c2be83b1040a9c3f22ed82a441bfa5dee16f58'
+    },
+};
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+var body;
+var req = https.request(options, function (res) {
+    var chunks = [];
+
+    res.on("data", function (chunk) {
+        chunks.push(chunk);
+    });
+
+    res.on("end", function (chunk) {
+        body = Buffer.concat(chunks).toString();
+        console.log("GET INFO");
+        // for(const input of body){
+        //     if(input == 'facultyid')
+        //         console.log(input);
+        // }
+    });
+
+    res.on("error", function (error) {
+        console.error(error);
+    });
+});
+
+
+
+
+//สร้าง route ขึ้นมา 1 ตัว โดยกำหนดให้ path คือ / หรือ index ของ host นั่นเอง
 app.get('/', function (req, res) {
     res.render('index', {});
 });
 
+app.get('/api-test', function (req, res) {
+    res.send(body);
+});
+
+//ทำการรันเซิฟเวอร์ตามพอร์ตที่กำหนดด้านบน
 app.listen(PORT, function () {
     console.log(`Listening on ${PORT}`)
 });
@@ -26,108 +69,4 @@ app.get('/api', function (req, res) {
 });
 
 
-
-
-
-//var options = {
-//    'method': 'POST',
-//    'hostname': 'restapi.tu.ac.th',
-//    'path': '/api/v1/auth/Ad/verify',
-//    'headers': {
-//        'Content-Type': 'application/json',
-//        'Application-Key': 'TUa4e553b83aa271d3411a4ad88395265801fcfb074110e8b0e03962c01f2aed6ab1662db3a0e1451df7835880c6828fcf'
-//    }
-//};
-
-//var req = https.request(options, function (res) {
-//    var chunks = [];
-
-//    res.on("data", function (chunk) {
-//        chunks.push(chunk);
-//    });
-
-//    res.on("end", function (chunk) {
-//        var body = Buffer.concat(chunks);
-//        console.log(body.toString());
-//    });
-
-//    res.on("error", function (error) {
-//        console.error(error);
-//    });
-//});
-
-
-//var options = {
-//    'method': 'GET',
-//    'hostname': 'restapi.tu.ac.th',
-//    'path': '/api/v2/std/fac/all',
-//    'headers': {
-//        'Content-Type': 'application/json',
-//        'Application-Key': 'TUa4e553b83aa271d3411a4ad88395265801fcfb074110e8b0e03962c01f2aed6ab1662db3a0e1451df7835880c6828fcf'
-//    }
-//};
-
-//var req = https.request(options, function (res) {
-//    var chunks = [];
-
-//    res.on("data", function (chunk) {
-//        chunks.push(chunk);
-//    });
-
-//    res.on("end", function (chunk) {
-//        var body = Buffer.concat(chunks);
-//        console.log(body.toString());
-//    });
-
-//    res.on("error", function (error) {
-//        console.error(error);
-//    });
-//});
-
-//req.end();
-
-
-// const options = {
-//     hostname: 'jsonplaceholder.typicode.com',
-//     path: '/posts/1/comments',
-//     method: 'GET',
-//     'headers': {
-//         'Content-Type': 'application/json',
-//     }
-// };
-
-// function dataCounter(inputs) {
-//     let counter = 0;
-//     for (const input of inputs) {
-//         if (input.postId === 1) {
-//             counter += 1;
-//             console.log('input.postId:' + input.postId);
-//             console.log('input.email:' + input.email);
-//         }
-//     }
-//     return counter;
-// };
-
-// const req = http.request(options, function(response) {
-//     response.setEncoding('utf8');
-//     var body = '';
-//     response.on('data', chunk => {
-//         body += chunk;
-//     });
-
-//     response.on('end', () => {
-//         console.log('body:' + body);
-//         var data = JSON.parse(body);
-//         console.log('number of posts:' + dataCounter(data));
-//         console.log('data:' + data);
-//         console.log('data[0]:' + data[0]);
-//         console.log('data[0].id:' + data[0].id);
-//         console.log('data[0].email:' + data[0].email);
-//         console.log('end of GET request');
-//     });
-// });
-
-// req.on('error', e => {
-//     console.log('Problem with request:', e.message);
-// });
-// req.end();
+req.end();
