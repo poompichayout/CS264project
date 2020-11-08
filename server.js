@@ -2,59 +2,50 @@
 var express = require('express');
 var path = require('path');
 var https = require('https');
-var http = require('http');
-const tuauth = require('./tuauth');
+var bodyParser = require('body-parser');
+var urlencodedParser = bodyParser.urlencoded({ extended: false});
 
 var PORT  = process.env.PORT || 8080;
 
 var app = express();
 
-
-var options = {
-    'method': 'GET',
-    'hostname': 'restapi.tu.ac.th',
-    'path': '/api/v2/std/fac/all',
-    'headers': {
-      'Content-Type': 'application/json',
-      'Application-Key': 'TUd385e507f10b7b04ec0c73d853e9ae18a332e504be6a734cafe5527017c2be83b1040a9c3f22ed82a441bfa5dee16f58'
-    },
-};
-
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-var body;
-var req = https.request(options, function (res) {
-    var chunks = [];
-
-    res.on("data", function (chunk) {
-        chunks.push(chunk);
-    });
-
-    res.on("end", function (chunk) {
-        body = Buffer.concat(chunks).toString();
-        console.log("GET INFO");
-        // for(const input of body){
-        //     if(input == 'facultyid')
-        //         console.log(input);
-        // }
-    });
-
-    res.on("error", function (error) {
-        console.error(error);
-    });
-});
-
-
-
-
 //สร้าง route ขึ้นมา 1 ตัว โดยกำหนดให้ path คือ / หรือ index ของ host นั่นเอง
 app.get('/', function (req, res) {
-    res.render('index', {});
+    res.end("Hello Word");
 });
 
-app.get('/api-test', function (req, res) {
-    res.send(body);
+app.get('/login', function (req, res) {
+    res.render('index');
+});
+
+app.get('/views/:file', function (req, res) {
+    res.sendFile(path.join(__dirname, 'views', req.params.file));
+});
+
+app.post('/login', urlencodedParser, function(req, res){
+    var data = {
+       'username': req.body.apiUser,
+       'password': req.body.apiPass
+    }
+    console.log(data);
+
+    async function secondFunc() {
+        var userInfo = await tuApi(data);
+        console.log(userInfo);
+        
+        if(userInfo.status == true){
+            res.render('home', userInfo);
+        }else{
+            console.log('wrong data');
+        }
+        
+    }
+
+    secondFunc()
+
 });
 
 //ทำการรันเซิฟเวอร์ตามพอร์ตที่กำหนดด้านบน
@@ -62,11 +53,44 @@ app.listen(PORT, function () {
     console.log(`Listening on ${PORT}`)
 });
 
-app.get('/api', function (req, res) {
-    const queryParams = req.query;
-    console.log('param[1]:' + queryParams['user']);
-    res.send(queryParams);
-});
+// define tu api request
+async function tuApi(data){ 
+    return new Promise(function( resolve, reject) {
+        var options = {
+            'method': 'POST',
+            'hostname': 'restapi.tu.ac.th',
+            'path': '/api/v1/auth/Ad/verify',
+            'headers': {
+            'Content-Type': 'application/json',
+            'Application-Key': 'TUd385e507f10b7b04ec0c73d853e9ae18a332e504be6a734cafe5527017c2be83b1040a9c3f22ed82a441bfa5dee16f58'
+            },
+        };
 
+        var userInfo;
 
-req.end();
+        var request = https.request(options, function (res) {
+            var chunks = [];
+        
+            res.on("data", function (chunk) {
+                chunks.push(chunk);
+            });
+        
+            res.on("end", function (chunk) {
+                var body = Buffer.concat(chunks);
+                userInfo = JSON.parse(body);
+                resolve(userInfo);
+            });
+        
+            res.on("error", function (error) {
+                console.error(error);
+            });
+        });
+        
+        var postData =  `{\n\t\"UserName\":\"${data.username}\",\n\t\"PassWord\":\"${data.password}\"\n}`;
+        console.log(postData);
+        request.write(postData);
+        
+        request.end();
+        
+    })
+}
