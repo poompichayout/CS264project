@@ -11,14 +11,15 @@ var app = express();
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+app.use(express.static(path.resolve(__dirname, 'public')));
 
 //สร้าง route ขึ้นมา 1 ตัว โดยกำหนดให้ path คือ / หรือ index ของ host นั่นเอง
 app.get('/', function (req, res) {
-    res.end("Hello Word");
+    res.render('index');
 });
 
 app.get('/login', function (req, res) {
-    res.render('index');
+    res.render('index', {'status': true} );
 });
 
 app.get('/views/:file', function (req, res) {
@@ -30,21 +31,21 @@ app.post('/login', urlencodedParser, function(req, res){
        'username': req.body.apiUser,
        'password': req.body.apiPass
     }
-    console.log(data);
 
     async function secondFunc() {
         var userInfo = await tuApi(data);
         console.log(userInfo);
         
         if(userInfo.status == true){
+            //res.redirect('/home');
             res.render('home', userInfo);
         }else{
             console.log('wrong data');
+            res.render('index', {'status':false} );
         }
-        
     }
 
-    secondFunc()
+    secondFunc();
 
 });
 
@@ -87,7 +88,6 @@ async function tuApi(data){
         });
         
         var postData =  `{\n\t\"UserName\":\"${data.username}\",\n\t\"PassWord\":\"${data.password}\"\n}`;
-        console.log(postData);
         request.write(postData);
         
         request.end();

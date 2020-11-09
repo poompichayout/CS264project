@@ -1,0 +1,69 @@
+body {
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+}
+
+.login {
+    background: #30336b;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.col-sm {
+    margin-top: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.jumbotron {
+    width: 300px;
+    margin-top: auto;
+    background: #ecf0f1;
+    box-shadow: 0px 0px 4px #9e9d9d;
+    margin-left: 12.5%;
+}
+
+label {
+    text-align: left;
+}
+
+input[type="username"],
+input[type="password"] {
+    width: 90%;
+    background-color: #ffffff;
+    transition: 0.5s;
+    margin: 0 auto;
+}
+input[type="username"]:focus,
+input[type="password"]:focus {
+    width: 100%;
+    background-color: #ffffff;
+}
+
+.login button[type="submit"] {
+    width: 50%;
+    transition: 0.5s;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.login button[type="submit"]:hover {
+    width: 55%;
+    height: 105%;
+}
+
+#pic-logo {
+    width: 50%;
+    height: 50%;
+    margin: 0 auto;
+    padding-bottom: 10px;
+    margin-top: -20px;
+}
+
+#error {
+    background-color: red;
+    color: white;
+    font-size: 15px;
+    text-align: center;
+}
