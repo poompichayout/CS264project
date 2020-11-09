@@ -15,7 +15,7 @@ app.use(express.static(path.resolve(__dirname, 'public')));
 
 //สร้าง route ขึ้นมา 1 ตัว โดยกำหนดให้ path คือ / หรือ index ของ host นั่นเอง
 app.get('/', function (req, res) {
-    res.render('index');
+    res.render('home', {'status': false});
 });
 
 app.get('/login', function (req, res) {
@@ -41,7 +41,7 @@ app.post('/login', urlencodedParser, function(req, res){
             res.render('home', userInfo);
         }else{
             console.log('wrong data');
-            res.render('index', {'status':false} );
+            res.render('index', {'status': false} );
         }
     }
 
