@@ -15,15 +15,15 @@ app.use(express.static(path.resolve(__dirname, 'public')));
 
 //สร้าง route ขึ้นมา 1 ตัว โดยกำหนดให้ path คือ / หรือ index ของ host นั่นเอง
 app.get('/', function (req, res) {
-    res.render('home', {'status': false});
+    res.redirect('/home');
 });
 
 app.get('/login', function (req, res) {
     res.render('index', {'status': true} );
 });
 
-app.get('/views/:file', function (req, res) {
-    res.sendFile(path.join(__dirname, 'views', req.params.file));
+app.get('/home', function (req, res) {
+    res.render('home', {'status':false});
 });
 
 app.post('/login', urlencodedParser, function(req, res){
@@ -37,7 +37,6 @@ app.post('/login', urlencodedParser, function(req, res){
         console.log(userInfo);
         
         if(userInfo.status == true){
-            //res.redirect('/home');
             res.render('home', userInfo);
         }else{
             console.log('wrong data');
