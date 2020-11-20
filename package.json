@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
   "name": "nodejs-web-app1",
   "version": "0.1.0",
@@ -19,3 +20,16 @@
     "node-localstorage": "^2.1.6"
   }
 }
+=======
+{
+  "name": "node-example",
+  "version": "0.0.1",
+  "dependencies": {
+    "express": "2.5.x"
+  },
+  "engines": {
+    "node": "0.8.x",
+    "npm": "1.1.x"
+  }
+}
+>>>>>>> 90fd58e (init)
