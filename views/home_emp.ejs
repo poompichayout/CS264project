@@ -35,8 +35,9 @@
       <div class="col-5" id="profile">
         <% if(status == true) {%>
         <h6><%=displayname_en %></h6>
-        <!--<img class="mx-auto d-block img-fluid h-75 w-50 pb-3" id="profile" src="https://web.reg.tu.ac.th/registrar/getstudentimage.asp?id=<%= username%>&Status=10">
-        -->
+    <!--
+        <img class="mx-auto d-block img-fluid h-75 w-50 pb-3" id="profile" src="https://web.reg.tu.ac.th/registrar/getstudentimage.asp?id=<%= username%>&Status=10">
+    -->
         <a href="/logout" class="align-text-bottom">Logout</a>
         <% } else { %>
           <a href="/login" class="align-text-bottom">Login</a>
@@ -59,11 +60,14 @@
               <a class="nav-link" href="/home"><h5>หน้าแรก</h5></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#"><h5>ยื่นคำร้อง</h5></a>
+              <a class="nav-link" href="#"><h5>คำร้องนักศึกษา</h5></a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#"><h5>สถานะคำร้อง</h5></a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#"><h5>นัดหมายนักศึกษา</h5></a>
+              </li>
           </ul>
         </div>
 
@@ -77,6 +81,13 @@
 
   <div class="row">
     <div class="col-3 bg-danger side">
+        <div class="card mt-2">
+            <div class="card-body">
+                <h5 class="card-title">Choices</h5>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+        </div>
     </div>
     <div class="col-9">Hello World</div>
   </div>

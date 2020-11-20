@@ -27,11 +27,22 @@ app.get('/login', function (req, res) { // หน้า login จ้า
 app.get('/home', function (req, res) { // หน้า home จ้า
     if(checkJsonEmpty(userInfo)){
         res.render('home', {'status': false});
-    }else {
+    } else if (userInfo.type == 'student'){
         res.render('home', userInfo);
+    } else if (userInfo.type == 'employee') {
+        res.render('home_emp', userInfo);
     }
-    
 });
+
+app.get('/logout', function (req,res) {
+    userInfo = new Object();
+    res.redirect('/home');
+});
+
+app.get('/home_emp', function (req,res) {
+    res.render('home_emp', {'status': false});
+});
+
 
 app.post('/login', urlencodedParser, function(req, res){
     var data = {

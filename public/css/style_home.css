@@ -54,3 +54,9 @@ body {
 .footer h6 {
     color: #ffffff;
 }
+
+.choice-box-side {
+    margin-top: 10px;
+    background-color: #ffffff;
+    font-size: 16px;
+}
