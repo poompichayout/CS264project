@@ -1,5 +1,5 @@
 body {
-    background-color: #F3E4CB;
+    background-image: url('/img/bg2.jpg');
     font-family: 'Mitr', sans-serif;
     font-size: 30px;
     margin: 0;
@@ -28,6 +28,7 @@ body {
 .nav-item {
     background-color: #FFBB00;
     max-height: fit-content;
+    transition: 0.25s;
 }
 .nav-item:hover {
     background-color: #7D0303;

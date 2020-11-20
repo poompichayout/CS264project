@@ -9,21 +9,28 @@ var PORT  = process.env.PORT || 8080;
 
 var app = express();
 
+var userInfo = new Object();
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(express.static(path.resolve(__dirname, 'public')));
 
-//สร้าง route ขึ้นมา 1 ตัว โดยกำหนดให้ path คือ / หรือ index ของ host นั่นเอง
+// สร้าง route ขึ้นมา 1 ตัว โดยกำหนดให้ path คือ / หรือ index ของ host นั่นเอง
 app.get('/', function (req, res) {
-    res.redirect('/home');
+    res.redirect('/home'); //ส่งไปรัน app.get /home
 });
 
-app.get('/login', function (req, res) {
+app.get('/login', function (req, res) { // หน้า login จ้า
     res.render('index', {'status': true} );
 });
 
-app.get('/home', function (req, res) {
-    res.render('home', {'status':false});
+app.get('/home', function (req, res) { // หน้า home จ้า
+    if(checkJsonEmpty(userInfo)){
+        res.render('home', {'status': false});
+    }else {
+        res.render('home', userInfo);
+    }
+    
 });
 
 app.post('/login', urlencodedParser, function(req, res){
@@ -33,12 +40,12 @@ app.post('/login', urlencodedParser, function(req, res){
     }
 
     async function secondFunc() {
-        var userInfo = await tuApi(data);
+        userInfo = await tuApi(data);
         console.log(userInfo);
         
         if(userInfo.status == true){
             res.render('home', userInfo);
-        }else{
+        }else {
             console.log('wrong data');
             res.render('index', {'status': false} );
         }
@@ -48,7 +55,7 @@ app.post('/login', urlencodedParser, function(req, res){
 
 });
 
-//ทำการรันเซิฟเวอร์ตามพอร์ตที่กำหนดด้านบน
+// ทำการรันเซิฟเวอร์ตามพอร์ตที่กำหนดด้านบน
 app.listen(PORT, function () {
     console.log(`Listening on ${PORT}`)
 });
@@ -92,4 +99,8 @@ async function tuApi(data){
         request.end();
         
     })
+}
+
+function checkJsonEmpty(obj){
+    return Object.keys(obj).length === 0 && obj.constructor === Object;
 }

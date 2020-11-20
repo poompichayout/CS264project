@@ -29,13 +29,14 @@
     <!-- Header
         Logo and Profile -->
     <div class="row">
-      <div class="col-10 logo-header">
+      <div class="col-7 logo-header">
         <img src="/img/thammasat-logo-full.png" class="img-fluid float-left pb-2">
       </div>
-      <div class="col-2" id="profile">
+      <div class="col-5" id="profile">
         <% if(status == true) {%>
-        <img class="mx-auto d-block img-fluid h-75 w-50 pb-3" id="profile" src="https://web.reg.tu.ac.th/registrar/getstudentimage.asp?id=<%= username%>&Status=10">
-        <h6><%=displayname_th %></h6>
+        <h6><%=displayname_en %></h6>
+        <!--<img class="mx-auto d-block img-fluid h-75 w-50 pb-3" id="profile" src="https://web.reg.tu.ac.th/registrar/getstudentimage.asp?id=<%= username%>&Status=10">
+        -->
         <% } else { %>
           <a href="/login" class="align-text-bottom">Login</a>
         <% } %>
@@ -44,7 +45,7 @@
   
     <!-- Start Navbar -->
   
-    <div class="container-fluid">
+    <div class="row navbar">
       <nav class="navbar navbar-expand-sm">
         
         <button class="navbar-toggler bg-danger" data-toggle="collapse" data-target="#collapse-target">
@@ -69,13 +70,14 @@
     </div>
 
   <!-- Start Content -->
-  <div class="container-fluid pt-2">
+  <div class="row pt-2">
     <img src="/img/dome-pic.png" class="img-fluid">
   </div>
 
-  <div class="container-fluid">
+  <div class="row">
     <div class="col-3 bg-danger side">
     </div>
+    <div class="col-9">Hello World</div>
   </div>
   
 
