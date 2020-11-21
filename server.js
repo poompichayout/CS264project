@@ -34,12 +34,32 @@ app.get('/home', function (req, res) { // หน้า home จ้า
     }
 });
 
+app.get('/petition_confirm/:formName', function(req, res) { // หน้าตรวจสอบการอนุมัติจ้า
+    if(checkJsonEmpty(userInfo)){
+        res.render(__dirname + '/views/' + req.params.formName, {'status': false});
+    } else if (userInfo.type == 'student'){
+        res.render(__dirname + '/views/' + req.params.formName, userInfo);
+    } else if (userInfo.type == 'employee') {
+        res.render('home_emp', userInfo);
+    }
+});
+
+app.get('/petition/:formName', function(req, res) { // หน้าตรวจสอบการอนุมัติจ้า
+    if(checkJsonEmpty(userInfo)){
+        res.render(__dirname + '/views/' + req.params.formName, {'status': false});
+    } else if (userInfo.type == 'student'){
+        res.render('home', userInfo);
+    } else if (userInfo.type == 'employee') {
+        res.render(__dirname + '/views/' + req.params.formName, userInfo);
+    }
+});
+
 app.get('/logout', function (req,res) {
     userInfo = new Object();
     res.redirect('/home');
 });
 
-app.get('/home_emp', function (req,res) {
+app.get('/home_emp', function (req,res) { // หน้า ui อาจารย์จ้า
     res.render('home_emp', {'status': false});
 });
 
