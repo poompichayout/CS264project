@@ -48,6 +48,7 @@ body {
 }
 
 .footer {
+    background-color: #ffbb00;
     text-align: center;
 }
 
@@ -59,4 +60,16 @@ body {
     margin-top: 10px;
     background-color: #ffffff;
     font-size: 16px;
+}
+
+.content {
+    font-family: 'Sarabun', sans-serif;
+}
+
+.table {
+    font-size: medium;
+}
+
+.pull-right {
+    margin-left: auto;
 }

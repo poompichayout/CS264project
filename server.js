@@ -25,9 +25,9 @@ app.get('/login', function (req, res) { // หน้า login จ้า
 });
 
 app.get('/home', function (req, res) { // หน้า home จ้า
-    if(checkJsonEmpty(userInfo)){
+    if(checkJsonEmpty(userInfo)) {
         res.render('home', {'status': false});
-    } else if (userInfo.type == 'student'){
+    } else if (userInfo.type == 'student') {
         res.render('home', userInfo);
     } else if (userInfo.type == 'employee') {
         res.render('home_emp', userInfo);
@@ -35,9 +35,9 @@ app.get('/home', function (req, res) { // หน้า home จ้า
 });
 
 app.get('/petition_confirm/:formName', function(req, res) { // หน้าตรวจสอบการอนุมัติจ้า
-    if(checkJsonEmpty(userInfo)){
+    if(checkJsonEmpty(userInfo)) {
         res.render(__dirname + '/views/' + req.params.formName, {'status': false});
-    } else if (userInfo.type == 'student'){
+    } else if (userInfo.type == 'student') {
         res.render(__dirname + '/views/' + req.params.formName, userInfo);
     } else if (userInfo.type == 'employee') {
         res.render('home_emp', userInfo);
@@ -45,9 +45,9 @@ app.get('/petition_confirm/:formName', function(req, res) { // หน้าต�
 });
 
 app.get('/petition/:formName', function(req, res) { // หน้าตรวจสอบการอนุมัติจ้า
-    if(checkJsonEmpty(userInfo)){
+    if(checkJsonEmpty(userInfo)) {
         res.render(__dirname + '/views/' + req.params.formName, {'status': false});
-    } else if (userInfo.type == 'student'){
+    } else if (userInfo.type == 'student') {
         res.render('home', userInfo);
     } else if (userInfo.type == 'employee') {
         res.render(__dirname + '/views/' + req.params.formName, userInfo);
