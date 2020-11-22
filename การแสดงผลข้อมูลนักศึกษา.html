@@ -97,11 +97,22 @@
         }
 
         .box{
-            width:2000px;
+            width:1500px;
             height:30px;
         }
         #box-1{
             background-color:rgb(91, 164, 233);
+        }
+        
+        .menu{
+            width: 25%;
+            float: left;
+            padding: 15px;
+        }
+        .main {
+            width: 60%;
+            float: left;
+            padding: 15px;
         }
 
     </style>
@@ -116,38 +127,42 @@
 
     <div class="topnav">
         <a href="/home">หน้าแรก</a>
-        <a href="#">ยื่นคำร้อง</a>
-        <a href="#">สถานะคำร้อง</a>
+        <a href="คำร้องนักศึกษา.html">ยื่นคำร้อง</a>
+        <a href="สถานะคำร้องนักศึกษา.html">สถานะคำร้อง</a>
     </div>
 
     <div class="container-fluid pt-2">
         <img src="https://group8-cs264project.herokuapp.com/img/dome-pic.png" class="img-fluid">
     </div>
-    
 
     <h1>ข้อมูลนักศึกษา</h1>
-    <div class="container-fluid pt-2">
-        <img src="https://group8-cs264project.herokuapp.com/img/getstudentimage.jpg" class="img-fluid">
+    <div class="menu">
+        <div class="container-fluid pt-2">
+            <img src="https://group8-cs264project.herokuapp.com/img/getstudentimage.jpg" class="img-fluid" width=200px>
+        </div>
+        
     </div>
     
-    <p>ชื่อ นายภูมิพิชญุตม์    นามสกุล คงเปี่ยม</p>
-    <p>เลขทะเบียน 6209680062</p>
+    <div class="main">
+        <p>ชื่อ นายภูมิพิชญุตม์    นามสกุล คงเปี่ยม</p>
+        <p>เลขทะเบียน 6209680062</p>
+        <div id="box-1" class="box">
+            <p>ข้อมูลที่อยู่นักศึกษา</p>
+        </div>
+
+        <p>ที่อยู่ XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</p>
+        <p>แขวง/ตำบล XXXXXXXXXXXXXXX     เขต/อำเภอ XXXXXXXXXXXXXXXX</p>
+        <p>จังหวัด XXXXXXXXXX</p>
+
+        <div id="box-1" class="box">
+            <p>เบอร์โทรศัพท์ติดต่อ และอาจารย์ที่ปรึกษา</p>
+        </div>
+
+        <p>โทรศัพท์ติดต่อนักศึกษา 081-234-5678</p>
+        <p>โทรศัพท์ติดต่อผู้ปกครอง 081-234-5678</p>
+        <p>อาจารย์ที่ปรึกษา XXXXXXXXXXXXXXXXXXXXXXXXXX</p>
+    </div>
     
-    <div id="box-1" class="box">
-        <p>ข้อมูลที่อยู่นักศึกษา</p>
-    </div>
-
-    <p>ที่อยู่ XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</p>
-    <p>แขวง/ตำบล XXXXXXXXXXXXXXX      เขต/อำเภอ XXXXXXXXXXXXXXXX</p>
-    <p>จังหวัด XXXXXXXXXX</p>
-
-    <div id="box-1" class="box">
-        <p>เบอร์โทรศัพท์ติดต่อ และอาจารย์ที่ปรึกษา</p>
-    </div>
-
-    <p>โทรศัพท์ติดต่อนักศึกษา 081-234-5678</p>
-    <p>โทรศัพท์ติดต่อผู้ปกครอง 081-234-5678</p>
-    <p>อาจารย์ที่ปรึกษา XXXXXXXXXXXXXXXXXXXXXXXXXX</p>
 
 </body>
 </html>
