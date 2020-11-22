@@ -22,7 +22,6 @@
   <link rel="stylesheet" type="text/css" href="/css/style_home.css">
   <link rel="stylesheet" type="text/css" href="/css/style_button_confirm.css">
   <link rel="shortcut icon" href="/img/thammasat-logo-trans.png">
-  <script src="/js/home.js"></script>
 </head>
 
 <body>
@@ -63,13 +62,13 @@
               <a class="nav-link" href="/home_emp"><h5>หน้าแรก</h5></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#"><h5>คำร้องนักศึกษา</h5></a>
+              <a class="nav-link" href="/petition/view_list_petition"><h5>คำร้องนักศึกษา</h5></a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#"><h5>สถานะคำร้อง</h5></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#"><h5>นัดหมายนักศึกษา</h5></a>
+                <a class="nav-link" href="/petition/u4"><h5>นัดหมายนักศึกษา</h5></a>
               </li>
           </ul>
         </div>
@@ -114,30 +113,43 @@
             <tr>
               <th scope="col">เลขทะเบียน</th>
               <th scope="col">รายชื่อนักศึกษาที่ส่งคำร้อง</th>
-              <th scope="col">วันที่</th>
+              <th scope="col">วันที่ดำเนินการ</th>
+              <th scope="col">สถานะการอนุมัติ</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-                <td>6209680062</td>
+                <td><a href="/data_student/6209680062" style="color:black;">6209680062</a></td>
                 <td>
-                    <a href="/petition/data_student" style="color: rgb(0, 0, 0);">นายภูมิพิชญุตม์ คงเปี่ยม</a>
+                    <a >นายภูมิพิชญุตม์ คงเปี่ยม</a>
                 </td>
                 <td>20/11/2020</td>
+                <td>
+                  <span class="not_appointment"></span>
+                  <a  style="color:red;" class="float-right">รอการอนุมัติ</a>
+                </td>
             </tr>
             <tr>
-              <td>6209680039</td>
+              <td><a href="/data_student/6209680039" style="color:black;">6209680039</a></td>
               <td>
-                  <a href="/petition/data_student" style="color: black;">นายคุณาวัฒน์ รอบรู้ธรรม</a>
+                  <a>นายคุณาวัฒน์ รอบรู้ธรรม</a>
               </td>
               <td>20/11/2020</td>
+              <td>
+                <span class="not_appointment"></span>
+                <a  style="color:red;" class="float-right">รอการอนุมัติ</a>
+              </td>
             </tr>
             <tr>
-              <td>6209610044</td>
+              <td><a href="/data_student/6209610044" style="color:black;">6209610044</a></td>
               <td>
-                  <a href="/petition/data_student" style="color: black;">นางสาวศศิกานต์ พิศเพ็ง</a>
+                  <a>นางสาวศศิกานต์ พิศเพ็ง</a>
               </td>
               <td>20/11/2020</td>
+              <td>
+                <span class="appointment"></span>
+                <a  style="color:green;" class="float-right">อนุมัติแล้ว</a>
+              </td>
             </tr>
           </tbody>
         </table>

@@ -63,6 +63,34 @@ app.get('/home_emp', function (req,res) { // หน้า ui อาจารย�
     res.render('home_emp', {'status': false});
 });
 
+app.get('/u4_5/:student_id', function (req,res) { //นัดหมายนักศึกษา
+    async function secondFunc() {
+        console.log(req.params.student_id);
+        let studentData = await getStudentData(req.params.student_id);
+
+        if(studentData.status == true){
+            console.log(studentData);
+            res.render('u4_5', studentData);
+        }else {
+
+        }
+    }
+    secondFunc();
+});
+
+app.get('/data_student/:student_id', function (req,res) { //นัดหมายนักศึกษา
+    async function secondFunc() {
+        let studentData = await getStudentData(req.params.student_id);
+
+        if(studentData.status == true){
+            console.log(studentData);
+            res.render('data_student', studentData);
+        }else {
+
+        }
+    }
+    secondFunc();
+});
 
 app.post('/login', urlencodedParser, function(req, res){
     var data = {
@@ -85,6 +113,7 @@ app.post('/login', urlencodedParser, function(req, res){
     secondFunc();
 
 });
+
 
 // ทำการรันเซิฟเวอร์ตามพอร์ตที่กำหนดด้านบน
 app.listen(PORT, function () {
@@ -131,6 +160,43 @@ async function tuApi(data){
         
     })
 }
+
+async function getStudentData(data){ 
+    return new Promise(function(resolve, reject) {
+        var options = {
+            'method': 'GET',
+            'hostname': 'restapi.tu.ac.th',
+            'path': `/api/v2/profile/std/info/?id=${data}`,
+            'headers': {
+              'Content-Type': 'application/json',
+              'Application-Key': 'TUd385e507f10b7b04ec0c73d853e9ae18a332e504be6a734cafe5527017c2be83b1040a9c3f22ed82a441bfa5dee16f58'
+            }
+        };
+          
+        var req = https.request(options, function (res) {
+            var chunks = [];
+        
+            res.on("data", function (chunk) {
+                chunks.push(chunk);
+            });
+        
+            res.on("end", function (chunk) {
+                let body = Buffer.concat(chunks);
+                let studentData = JSON.parse(body);
+                resolve(studentData);
+            });
+        
+            res.on("error", function (error) {
+                console.error(error);
+            });
+        });
+        
+        req.end();
+        
+    })
+}
+
+
 
 function checkJsonEmpty(obj){
     return Object.keys(obj).length === 0 && obj.constructor === Object;

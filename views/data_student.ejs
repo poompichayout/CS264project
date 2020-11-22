@@ -21,6 +21,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300&display=swap" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="/css/style_home.css">
   <link rel="stylesheet" type="text/css" href="/css/style_button_confirm.css">
+  <link rel="stylesheet" type="text/css" href="/css/style_appointment.css">
   <link rel="shortcut icon" href="/img/thammasat-logo-trans.png">
   <script src="/js/home.js"></script>
 </head>
@@ -36,15 +37,7 @@
         <img src="/img/thammasat-logo-full.png" class="img-fluid float-left pb-2">
       </div>
       <div class="col-5" id="profile">
-        <% if(status == true) {%>
-        <h6><%=displayname_en %></h6>
-    <!--
-        <img class="mx-auto d-block img-fluid h-75 w-50 pb-3" id="profile" src="https://web.reg.tu.ac.th/registrar/getstudentimage.asp?id=<%= username%>&Status=10">
-    -->
-        <a href="/logout" class="align-text-bottom">Logout</a>
-        <% } else { %>
           <a href="/login" class="align-text-bottom">Login</a>
-        <% } %>
       </div>
     </div>
   
@@ -63,7 +56,7 @@
               <a class="nav-link" href="/home_emp"><h5>หน้าแรก</h5></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#"><h5>คำร้องนักศึกษา</h5></a>
+              <a class="nav-link" href="/petition/view_list_petition"><h5>คำร้องนักศึกษา</h5></a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#"><h5>สถานะคำร้อง</h5></a>
@@ -103,13 +96,127 @@
 
   <div class="row">
     <div class="col-3 bg-danger side text-center">
+      <a href="/data_student/<%= data.userName %>" class="button">ประวัตินักศึกษา</a>
       <a href="https://drive.google.com/file/d/1U1TXv4KK4UwqpgYQsBIcVUlvMlHO4pwK/view?usp=sharing" class="button">คำร้อง</a>
       <a href="https://drive.google.com/file/d/1WOeK5WmgjNd91vces65MGV9Hsmw4VLvc/view?usp=sharing" class="button">เอกสารแนบ</a>
-        
+      <button class="button">ยืนยันการอนุมัติคำร้อง</button>
     </div>
     <div class="col-9 content">
-      
-    </div>
+      <div class="card-body">
+        <h5 class="card-title">ข้อมูลนักศึกษา - <%=data.displayname_th %></h5>
+        <hr>
+
+
+        <div class="form-group row">
+          <label class="col-sm-3 col-form-label">สถานะ</label>
+          <label class="col-sm-9 col-form-label">
+            <% if(!(data.statusname).localeCompare('ปกติ')) { %>
+              ยังศึกษาอยู่ / ปกติ
+            <% } else { %>
+              ไม่ศึกษาแล้ว
+            <% } %>
+          </label>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-3 col-form-label">รหัสนักศึกษา</label>
+          <label class="col-sm-9 col-form-label">
+            <%=data.userName %>
+          </label>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-3 col-form-label">คำนำหน้าชื่อ</label>
+          <label class="col-sm-9 col-form-label">
+            <%=data.prefixname %>
+          </label>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-3 col-form-label">ชื่อภาษาไทย</label>
+          <label class="col-sm-9 col-form-label">
+            <%=data.displayname_th %>
+          </label>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-3 col-form-label">ชื่อภาษาอังกฤษ</label>
+          <label class="col-sm-9 col-form-label">
+            <%=data.displayname_en %>
+          </label>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-3 col-form-label">อีเมลล์</label>
+          <label class="col-sm-9 col-form-label">
+            <%=data.email %>
+          </label>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-3 col-form-label">สาขาวิชา / ภาควิชา</label>
+          <label class="col-sm-9 col-form-label">
+            <%=data.department %>
+          </label>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-3 col-form-label">คณะ</label>
+          <label class="col-sm-9 col-form-label">
+            <%=data.faculty %>
+          </label>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-3 col-form-label">GPA</label>
+          <label class="col-sm-9 col-form-label">
+            Unknown
+          </label>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-3 col-form-label">Warning Status</label>
+          <label class="col-sm-9 col-form-label">
+            Unknown
+          </label>
+        </div>
+
+      </div>
+      <hr>
+
+      <div class="card-body">
+        <h5 class="card-title">ข้อมูลคำร้อง - <%=data.displayname_th %></h5>
+        <hr>
+        <div class="form-group row">
+          <label class="col-sm-3 col-form-label">เรื่อง</label>
+          <label class="col-sm-9 col-form-label">Unknown</label>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-3 col-form-label">ประสงค์จะยื่นคำร้องเรื่อง</label>
+          <label class="col-sm-9 col-form-label">จดทะเบียนล่าช้า/เพิ่มล่าช้า</label>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-3 col-form-label">เหตุผลที่ยื่นคำร้อง</label>
+          <label class="col-sm-9 col-form-label">เหตุผลจะขึ้นช่องนี้</label>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-3 col-form-label">ใบคำร้องฉบับเต็ม</label>
+          <button class="button" href="https://drive.google.com/file/d/1U1TXv4KK4UwqpgYQsBIcVUlvMlHO4pwK/view?usp=sharing">กด</button>
+        </div>
+      </div>
+
+
+        <div class="container-xl text-center">
+          <button class="button" style="width: 100%;">กดเพื่ออนุมัติคำร้อง</button>
+        </div>
+
+      <!-- Start Form 
+        <img src="/img/ประวัตินักศึกษา.jpg" height="420" width="300" class="img-fluid float-middle pt-3">
+        -->
+      </div>
   </div>
   
 
